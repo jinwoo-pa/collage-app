@@ -10,9 +10,7 @@
       --text-xs:clamp(0.75rem,.7rem + .25vw,.875rem);
       --text-sm:clamp(0.875rem,.8rem + .35vw,1rem);
       --text-base:clamp(1rem,.95rem + .25vw,1.125rem);
-      --text-lg:clamp(1.125rem,1rem + .75vw,1.5rem);
-      --text-xl:clamp(1.5rem,1.2rem + 1.25vw,2.25rem);
-      --sp1:.25rem;--sp2:.5rem;--sp3:.75rem;--sp4:1rem;--sp5:1.25rem;--sp6:1.5rem;--sp8:2rem;
+      --sp1:.25rem;--sp2:.5rem;--sp3:.75rem;--sp4:1rem;--sp5:1.25rem;--sp6:1.5rem;
       --bg:#f7f6f2;--surf:#f9f8f5;--surf2:#fbfbf9;
       --border:#d4d1ca;--text:#28251d;--muted:#7a7974;
       --primary:#01696f;--primary-h:#0c4e54;--primary-hl:#cedcd8;
@@ -25,7 +23,6 @@
       --bg:#171614;--surf:#1c1b19;--surf2:#201f1d;
       --border:#393836;--text:#cdccca;--muted:#797876;
       --primary:#4f98a3;--primary-h:#227f8b;--primary-hl:#313b3b;
-      --sh-sm:0 1px 2px rgba(0,0,0,.2);--sh-md:0 4px 12px rgba(0,0,0,.3);
     }
     *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
     html{-webkit-font-smoothing:antialiased;touch-action:manipulation}
@@ -34,27 +31,18 @@
     button{border:none;transition:all var(--ease)}
     button:active{opacity:.75;transform:scale(.97)}
     img,canvas{display:block;max-width:100%}
-
     .page{display:grid;grid-template-rows:auto 1fr auto;min-height:100dvh}
-
-    /* topbar */
     .topbar{display:flex;align-items:center;justify-content:space-between;padding:var(--sp3) var(--sp4);background:var(--surf);border-bottom:1px solid rgba(40,37,29,.1);position:sticky;top:0;z-index:50;gap:var(--sp3)}
     .topbar-logo{display:flex;align-items:center;gap:var(--sp2)}
     .topbar-logo svg{width:28px;height:28px;color:var(--primary);flex-shrink:0}
     .topbar-logo h1{font-size:var(--text-base);font-weight:700;line-height:1}
     .muted{color:var(--muted);font-size:var(--text-sm)}
     .theme-btn{width:44px;height:44px;min-width:44px;border-radius:var(--r-full);background:var(--surf2);border:1px solid var(--border);color:var(--text);display:grid;place-items:center}
-
-    /* content */
     .content{padding:var(--sp4);display:grid;gap:var(--sp5);max-width:800px;margin:0 auto;width:100%}
-
-    /* upload */
     .upload-zone{border:2px dashed var(--border);border-radius:var(--r-lg);padding:var(--sp6) var(--sp4);text-align:center;background:var(--surf2);cursor:pointer;display:block;transition:all var(--ease)}
     .upload-zone:active{border-color:var(--primary);background:var(--primary-hl)}
     .upload-zone input{display:none}
     .upload-icon{width:28px;height:28px;margin:0 auto var(--sp2);color:var(--primary)}
-
-    /* controls */
     .controls-card{background:var(--surf);border:1px solid rgba(40,37,29,.1);border-radius:var(--r-xl);padding:var(--sp4);display:grid;gap:var(--sp3);box-shadow:var(--sh-sm)}
     .controls-grid{display:grid;grid-template-columns:1fr 1fr;gap:var(--sp3)}
     .field{display:grid;gap:var(--sp1)}
@@ -63,42 +51,21 @@
     .field input[type="color"]{width:100%;height:44px;padding:.2rem .3rem;border:1px solid var(--border);border-radius:var(--r-md);background:var(--surf2)}
     .field input[type="range"]{width:100%;accent-color:var(--primary);border:none;background:none;height:28px}
     .range-row{display:flex;justify-content:space-between;align-items:center}
-
-    /* ── CANVAS WRAP ── */
     .canvas-card{background:var(--surf);border:1px solid rgba(40,37,29,.1);border-radius:var(--r-xl);padding:var(--sp3);box-shadow:var(--sh-md);position:relative}
     .canvas-container{position:relative;border-radius:calc(var(--r-xl) - var(--sp3));overflow:hidden;background:#fff;line-height:0}
     #collageCanvas{width:100%;aspect-ratio:1;display:block;touch-action:none;cursor:default}
-
-    /* 편집모드 안내 오버레이 (캔버스 위에 뜨는 툴바) */
-    .edit-toolbar{
-      position:absolute;top:var(--sp3);left:50%;transform:translateX(-50%);
-      display:none;align-items:center;gap:var(--sp2);
-      background:rgba(1,105,111,.92);backdrop-filter:blur(8px);
-      color:#fff;padding:var(--sp2) var(--sp3);border-radius:var(--r-full);
-      font-size:var(--text-xs);font-weight:600;white-space:nowrap;
-      box-shadow:0 4px 16px rgba(0,0,0,.25);z-index:10;pointer-events:none;
-    }
+    .edit-toolbar{position:absolute;top:var(--sp3);left:50%;transform:translateX(-50%);display:none;align-items:center;gap:var(--sp2);background:rgba(1,105,111,.92);backdrop-filter:blur(8px);color:#fff;padding:var(--sp2) var(--sp3);border-radius:var(--r-full);font-size:var(--text-xs);font-weight:600;white-space:nowrap;box-shadow:0 4px 16px rgba(0,0,0,.25);z-index:10;pointer-events:none}
     .edit-toolbar.visible{display:flex}
     .edit-toolbar svg{width:14px;height:14px;flex-shrink:0}
-
-    /* 모드 안내 힌트 */
     .hint{font-size:var(--text-xs);color:var(--muted);display:flex;align-items:center;gap:var(--sp2);padding:var(--sp2) var(--sp3);background:var(--surf2);border-radius:var(--r-md);border:1px solid rgba(40,37,29,.07);margin-top:var(--sp3)}
     .hint svg{width:14px;height:14px;flex-shrink:0;color:var(--primary)}
-
-    /* 선택된 사진 하단 컨트롤 바 */
-    .cell-controls{
-      display:none;align-items:center;gap:var(--sp3);
-      margin-top:var(--sp3);padding:var(--sp3) var(--sp4);
-      background:var(--surf2);border-radius:var(--r-lg);border:1px solid rgba(1,105,111,.25);
-    }
+    .cell-controls{display:none;align-items:center;gap:var(--sp3);margin-top:var(--sp3);padding:var(--sp3) var(--sp4);background:var(--surf2);border-radius:var(--r-lg);border:1px solid rgba(1,105,111,.25)}
     .cell-controls.visible{display:flex;flex-wrap:wrap}
     .cell-controls label{font-size:var(--text-xs);font-weight:600;color:var(--primary);white-space:nowrap}
     .cell-controls input[type="range"]{flex:1;min-width:80px;accent-color:var(--primary);border:none;background:none;height:32px}
     .cc-zoom-val{font-size:var(--text-xs);color:var(--muted);min-width:36px;text-align:right}
     .cc-reset{height:36px;padding:0 var(--sp3);border-radius:var(--r-full);background:transparent;color:var(--primary);border:1px solid var(--primary);font-size:var(--text-xs);font-weight:700}
     .cc-done{height:36px;padding:0 var(--sp4);border-radius:var(--r-full);background:var(--primary);color:#fff;font-size:var(--text-xs);font-weight:700;margin-left:auto}
-
-    /* thumbs */
     .thumbs-card{background:var(--surf);border:1px solid rgba(40,37,29,.1);border-radius:var(--r-xl);padding:var(--sp4);box-shadow:var(--sh-sm)}
     .thumbs-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:var(--sp3)}
     .thumbs-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(72px,1fr));gap:var(--sp2)}
@@ -111,8 +78,6 @@
     .thumb .del{position:absolute;top:4px;right:4px;width:28px;height:28px;min-width:28px;border-radius:var(--r-full);background:rgba(0,0,0,.6);color:#fff;display:grid;place-items:center;padding:0}
     .empty-state{display:flex;flex-direction:column;align-items:center;justify-content:center;height:130px;color:var(--muted);gap:var(--sp2);font-size:var(--text-sm);text-align:center}
     .tag{display:inline-flex;align-items:center;gap:4px;font-size:var(--text-xs);font-weight:600;padding:3px 9px;border-radius:var(--r-full);background:var(--primary-hl);color:var(--primary)}
-
-    /* bottom bar */
     .action-bar{position:sticky;bottom:0;background:var(--surf);border-top:1px solid rgba(40,37,29,.1);padding:var(--sp3) var(--sp4);display:grid;grid-template-columns:1fr 1fr;gap:var(--sp3);z-index:40}
     .btn{display:inline-flex;align-items:center;justify-content:center;gap:6px;padding:0 1rem;height:52px;border-radius:var(--r-md);font-size:var(--text-sm);font-weight:700;line-height:1;min-height:44px}
     .btn svg{width:18px;height:18px;flex-shrink:0}
@@ -120,14 +85,17 @@
     .btn-primary:active{background:var(--primary-h)}
     .btn-ghost{background:transparent;color:var(--text);border:1px solid var(--border)}
     .btn-ghost:active{background:var(--surf2)}
+    .saving-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:200;flex-direction:column;align-items:center;justify-content:center;gap:1rem;color:#fff;font-size:var(--text-sm);font-weight:600}
+    .saving-overlay.visible{display:flex}
+    @keyframes spin{to{transform:rotate(360deg)}}
+    .spinner{width:40px;height:40px;border:4px solid rgba(255,255,255,.3);border-top-color:#fff;border-radius:50%;animation:spin .8s linear infinite}
   </style>
 </head>
 <body>
 <div class="page">
-
   <header class="topbar">
     <div class="topbar-logo">
-      <svg viewBox="0 0 64 64" fill="none" aria-label="로고">
+      <svg viewBox="0 0 64 64" fill="none">
         <rect x="8" y="8" width="22" height="22" rx="5" stroke="currentColor" stroke-width="4"/>
         <rect x="34" y="8" width="22" height="22" rx="5" stroke="currentColor" stroke-width="4"/>
         <rect x="8" y="34" width="22" height="22" rx="5" stroke="currentColor" stroke-width="4"/>
@@ -143,7 +111,6 @@
   </header>
 
   <main class="content">
-
     <label class="upload-zone" for="fileInput">
       <svg class="upload-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="m21 15-5-5L5 21"/></svg>
       <strong>사진 선택하기</strong>
@@ -180,18 +147,14 @@
       </div>
     </div>
 
-    <!-- CANVAS -->
     <div class="canvas-card">
       <div class="canvas-container">
-        <canvas id="collageCanvas" width="1200" height="1200"></canvas>
-        <!-- 편집 중 상태 툴바 (캔버스 위에 표시) -->
+        <canvas id="collageCanvas" width="900" height="900"></canvas>
         <div class="edit-toolbar" id="editToolbar">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
           드래그로 구도 이동 · 핀치로 줌
         </div>
       </div>
-
-      <!-- 선택된 사진 컨트롤 (캔버스 바로 아래) -->
       <div class="cell-controls" id="cellControls">
         <label for="zoomSlider">줌</label>
         <input id="zoomSlider" type="range" min="100" max="300" value="100">
@@ -199,14 +162,12 @@
         <button id="resetFocus" class="cc-reset">초기화</button>
         <button id="focusDone" class="cc-done">완료 ✓</button>
       </div>
-
       <div class="hint">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
         <span id="hintText">사진을 <strong>탭</strong>하면 그 자리에서 바로 구도를 조정할 수 있어요</span>
       </div>
     </div>
 
-    <!-- THUMBS -->
     <div class="thumbs-card">
       <div class="thumbs-header">
         <h3 style="font-size:var(--text-base);font-weight:700">사진 순서 편집</h3>
@@ -217,7 +178,6 @@
       </div>
       <div id="thumbs" class="thumbs-grid"></div>
     </div>
-
   </main>
 
   <div class="action-bar">
@@ -232,385 +192,365 @@
   </div>
 </div>
 
+<div class="saving-overlay" id="savingOverlay">
+  <div class="spinner"></div>
+  <span>고화질로 저장 중...</span>
+</div>
+
 <script>
-/* ═══════════════════════════════════════
-   STATE
-═══════════════════════════════════════ */
-let photos = [];      // { id, src, img, ox, oy, zoom }
+let photos = [];
 let selectedIdx = null;
-let cellMap = [];     // { idx, x, y, w, h }
+let cellMap = [];
+let rafPending = false;
 
-/* ═══════════════════════════════════════
-   DOM
-═══════════════════════════════════════ */
-const fileInput     = document.getElementById('fileInput');
-const layoutType    = document.getElementById('layoutType');
-const columns       = document.getElementById('columns');
-const gapSize       = document.getElementById('gapSize');
-const gapVal        = document.getElementById('gapVal');
-const bgColor       = document.getElementById('bgColor');
-const downloadBtn   = document.getElementById('downloadBtn');
-const clearBtn      = document.getElementById('clearBtn');
-const canvas        = document.getElementById('collageCanvas');
-const ctx           = canvas.getContext('2d');
-const thumbsEl      = document.getElementById('thumbs');
-const photoCountEl  = document.getElementById('photoCount');
-const themeToggle   = document.getElementById('themeToggle');
-const editToolbar   = document.getElementById('editToolbar');
-const cellControls  = document.getElementById('cellControls');
-const zoomSlider    = document.getElementById('zoomSlider');
-const zoomVal       = document.getElementById('zoomVal');
-const resetFocus    = document.getElementById('resetFocus');
-const focusDone     = document.getElementById('focusDone');
-const hintText      = document.getElementById('hintText');
-const html          = document.documentElement;
+function scheduleRender() {
+  if (rafPending) return;
+  rafPending = true;
+  requestAnimationFrame(() => { rafPending = false; renderCollage(); });
+}
 
-/* ═══════════════════════════════════════
-   THEME
-═══════════════════════════════════════ */
+const fileInput    = document.getElementById('fileInput');
+const layoutType   = document.getElementById('layoutType');
+const columns      = document.getElementById('columns');
+const gapSize      = document.getElementById('gapSize');
+const gapVal       = document.getElementById('gapVal');
+const bgColor      = document.getElementById('bgColor');
+const downloadBtn  = document.getElementById('downloadBtn');
+const clearBtn     = document.getElementById('clearBtn');
+const canvas       = document.getElementById('collageCanvas');
+const ctx          = canvas.getContext('2d');
+const thumbsEl     = document.getElementById('thumbs');
+const photoCountEl = document.getElementById('photoCount');
+const themeToggle  = document.getElementById('themeToggle');
+const editToolbar  = document.getElementById('editToolbar');
+const cellControls = document.getElementById('cellControls');
+const zoomSlider   = document.getElementById('zoomSlider');
+const zoomVal      = document.getElementById('zoomVal');
+const resetFocus   = document.getElementById('resetFocus');
+const focusDone    = document.getElementById('focusDone');
+const hintText     = document.getElementById('hintText');
+const savingOverlay= document.getElementById('savingOverlay');
+const html         = document.documentElement;
+
 let theme = matchMedia('(prefers-color-scheme:dark)').matches ? 'dark' : 'light';
 html.setAttribute('data-theme', theme);
-function setThemeIcon(){
-  themeToggle.innerHTML = theme==='dark'
+function setThemeIcon() {
+  themeToggle.innerHTML = theme === 'dark'
     ? '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>'
     : '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>';
 }
 setThemeIcon();
-themeToggle.addEventListener('click', ()=>{ theme=theme==='dark'?'light':'dark'; html.setAttribute('data-theme',theme); setThemeIcon(); });
+themeToggle.addEventListener('click', () => { theme = theme === 'dark' ? 'light' : 'dark'; html.setAttribute('data-theme', theme); setThemeIcon(); });
 
-/* ═══════════════════════════════════════
-   HELPERS
-═══════════════════════════════════════ */
-function readFile(f){ return new Promise((r,j)=>{ const fr=new FileReader(); fr.onload=()=>r(fr.result); fr.onerror=j; fr.readAsDataURL(f); }); }
-function loadImg(src){ return new Promise((r,j)=>{ const i=new Image(); i.onload=()=>r(i); i.onerror=j; i.src=src; }); }
-function uid(){ return Math.random().toString(36).slice(2); }
+function readFile(f) { return new Promise((r,j) => { const fr = new FileReader(); fr.onload = () => r(fr.result); fr.onerror = j; fr.readAsDataURL(f); }); }
+function loadImg(src) { return new Promise((r,j) => { const i = new Image(); i.onload = () => r(i); i.onerror = j; i.src = src; }); }
+function uid() { return Math.random().toString(36).slice(2); }
 
-/* canvas 좌표 → 실제 canvas 픽셀 좌표 변환 */
-function canvasPt(clientX, clientY){
-  const rect = canvas.getBoundingClientRect();
-  const sx = canvas.width / rect.width;
-  const sy = canvas.height / rect.height;
-  return { x:(clientX-rect.left)*sx, y:(clientY-rect.top)*sy };
+const PREVIEW_MAX = 1200;
+function makeThumb(img) {
+  const scale = Math.min(1, PREVIEW_MAX / Math.max(img.width, img.height));
+  if (scale === 1) return img;
+  const oc = document.createElement('canvas');
+  oc.width  = Math.round(img.width  * scale);
+  oc.height = Math.round(img.height * scale);
+  oc.getContext('2d').drawImage(img, 0, 0, oc.width, oc.height);
+  const resized = new Image();
+  resized.src = oc.toDataURL('image/jpeg', 0.92);
+  resized.width  = oc.width;
+  resized.height = oc.height;
+  return resized;
 }
 
-/* ═══════════════════════════════════════
-   FILE INPUT
-═══════════════════════════════════════ */
+function canvasPt(clientX, clientY) {
+  const rect = canvas.getBoundingClientRect();
+  return { x: (clientX - rect.left) * canvas.width / rect.width, y: (clientY - rect.top) * canvas.height / rect.height };
+}
+
 fileInput.addEventListener('change', async e => {
-  for (const f of Array.from(e.target.files||[])){
+  for (const f of Array.from(e.target.files || [])) {
     const src = await readFile(f);
     const img = await loadImg(src);
-    photos.push({ id:uid(), src, img, ox:0.5, oy:0.5, zoom:1 });
+    const thumb = makeThumb(img);
+    photos.push({ id: uid(), src, img, thumb, ox: 0.5, oy: 0.5, zoom: 1 });
   }
   e.target.value = '';
-  renderThumbs(); renderCollage();
+  renderThumbs(); scheduleRender();
 });
 
-/* ═══════════════════════════════════════
-   SETTINGS
-═══════════════════════════════════════ */
-gapSize.addEventListener('input',     ()=>{ gapVal.textContent=gapSize.value+'px'; renderCollage(); });
-layoutType.addEventListener('change', ()=>renderCollage());
-columns.addEventListener('change',    ()=>renderCollage());
-bgColor.addEventListener('input',     ()=>renderCollage());
-clearBtn.addEventListener('click',    ()=>{ photos=[]; deselect(); renderThumbs(); renderCollage(); });
+gapSize.addEventListener('input',     () => { gapVal.textContent = gapSize.value + 'px'; scheduleRender(); });
+layoutType.addEventListener('change', () => scheduleRender());
+columns.addEventListener('change',    () => scheduleRender());
+bgColor.addEventListener('input',     () => scheduleRender());
+clearBtn.addEventListener('click',    () => { photos = []; deselect(); renderThumbs(); scheduleRender(); });
 downloadBtn.addEventListener('click', download);
 
-/* ═══════════════════════════════════════
-   SELECT / DESELECT
-═══════════════════════════════════════ */
-function selectCell(idx){
+function selectCell(idx) {
   selectedIdx = idx;
   const p = photos[idx];
-  zoomSlider.value = Math.round(p.zoom*100);
-  zoomVal.textContent = Math.round(p.zoom*100)+'%';
+  zoomSlider.value = Math.round(p.zoom * 100);
+  zoomVal.textContent = Math.round(p.zoom * 100) + '%';
   editToolbar.classList.add('visible');
   cellControls.classList.add('visible');
-  hintText.innerHTML = `사진 ${idx+1} 편집 중 · <strong>드래그</strong>로 구도 이동 · <strong>핀치</strong>로 줌`;
+  hintText.innerHTML = `사진 ${idx + 1} 편집 중 · <strong>드래그</strong>로 구도 이동 · <strong>핀치</strong>로 줌`;
   canvas.style.cursor = 'move';
-  renderCollage(); renderThumbs();
+  scheduleRender(); renderThumbs();
 }
-function deselect(){
+function deselect() {
   selectedIdx = null;
   editToolbar.classList.remove('visible');
   cellControls.classList.remove('visible');
   hintText.innerHTML = '사진을 <strong>탭</strong>하면 그 자리에서 바로 구도를 조정할 수 있어요';
   canvas.style.cursor = 'default';
-  renderCollage(); renderThumbs();
+  scheduleRender(); renderThumbs();
 }
 focusDone.addEventListener('click', deselect);
-resetFocus.addEventListener('click', ()=>{
-  if(selectedIdx===null) return;
-  photos[selectedIdx].ox=0.5; photos[selectedIdx].oy=0.5; photos[selectedIdx].zoom=1;
-  zoomSlider.value=100; zoomVal.textContent='100%';
-  renderCollage();
+resetFocus.addEventListener('click', () => {
+  if (selectedIdx === null) return;
+  photos[selectedIdx].ox = 0.5; photos[selectedIdx].oy = 0.5; photos[selectedIdx].zoom = 1;
+  zoomSlider.value = 100; zoomVal.textContent = '100%';
+  scheduleRender();
 });
-zoomSlider.addEventListener('input', ()=>{
-  if(selectedIdx===null) return;
-  photos[selectedIdx].zoom = zoomSlider.value/100;
-  zoomVal.textContent = zoomSlider.value+'%';
-  renderCollage();
+zoomSlider.addEventListener('input', () => {
+  if (selectedIdx === null) return;
+  photos[selectedIdx].zoom = zoomSlider.value / 100;
+  zoomVal.textContent = zoomSlider.value + '%';
+  scheduleRender();
 });
 
-/* ═══════════════════════════════════════
-   CANVAS INTERACTIONS
-   상태 머신:
-   - 대기(selectedIdx=null): 탭 → 사진 선택
-   - 편집(selectedIdx≠null): 드래그 → 구도이동, 핀치 → 줌
-═══════════════════════════════════════ */
+let drag = { active: false, lastX: 0, lastY: 0 };
+let tapStart = null;
 
-/* 포인터 위치를 canvas 픽셀 좌표로 */
-function getCellAt(cx, cy){
-  for(const cell of cellMap){
-    if(cx>=cell.x && cx<=cell.x+cell.w && cy>=cell.y && cy<=cell.y+cell.h) return cell;
+function getCellAt(cx, cy) {
+  for (const cell of cellMap) {
+    if (cx >= cell.x && cx <= cell.x + cell.w && cy >= cell.y && cy <= cell.y + cell.h) return cell;
   }
   return null;
 }
 
-/* ── 단일 터치/마우스 드래그 (구도 이동) ── */
-let drag = { active:false, lastX:0, lastY:0 };
-
-/* 탭 감지용: touchstart 위치 기억 */
-let tapStart = null;
-
-canvas.addEventListener('touchstart', e=>{
+canvas.addEventListener('touchstart', e => {
   e.preventDefault();
   const t = e.touches[0];
-  tapStart = { x:t.clientX, y:t.clientY, time:Date.now() };
-
-  if(selectedIdx !== null && e.touches.length === 1){
-    drag.active = true;
-    drag.lastX = t.clientX;
-    drag.lastY = t.clientY;
+  tapStart = { x: t.clientX, y: t.clientY, time: Date.now() };
+  if (selectedIdx !== null && e.touches.length === 1) {
+    drag.active = true; drag.lastX = t.clientX; drag.lastY = t.clientY;
   }
-}, {passive:false});
+}, { passive: false });
 
-canvas.addEventListener('touchmove', e=>{
+canvas.addEventListener('touchmove', e => {
   e.preventDefault();
-  if(e.touches.length === 2){
-    handlePinch(e); return;
-  }
-  if(!drag.active || selectedIdx===null) return;
+  if (e.touches.length === 2) { handlePinch(e); return; }
+  if (!drag.active || selectedIdx === null) return;
   const t = e.touches[0];
-  const dx = t.clientX - drag.lastX;
-  const dy = t.clientY - drag.lastY;
-  drag.lastX = t.clientX;
-  drag.lastY = t.clientY;
-  applyPan(selectedIdx, dx, dy);
-  tapStart = null; // 움직였으니 탭 취소
-}, {passive:false});
+  applyPan(selectedIdx, t.clientX - drag.lastX, t.clientY - drag.lastY);
+  drag.lastX = t.clientX; drag.lastY = t.clientY;
+  tapStart = null;
+}, { passive: false });
 
-canvas.addEventListener('touchend', e=>{
+canvas.addEventListener('touchend', e => {
   e.preventDefault();
-  drag.active = false;
-  pinchState.active = false;
-
-  // 탭 판정: 500ms 이내, 10px 이내 이동
-  if(tapStart){
+  drag.active = false; pinchState.active = false;
+  if (tapStart) {
     const t = e.changedTouches[0];
-    const moved = Math.hypot(t.clientX-tapStart.x, t.clientY-tapStart.y);
-    const elapsed = Date.now()-tapStart.time;
-    if(moved<10 && elapsed<500){
+    const moved = Math.hypot(t.clientX - tapStart.x, t.clientY - tapStart.y);
+    if (moved < 10 && Date.now() - tapStart.time < 500) {
       const pt = canvasPt(t.clientX, t.clientY);
       const cell = getCellAt(pt.x, pt.y);
-      if(selectedIdx !== null){
-        // 이미 편집 중 → 다른 칸 탭하면 그 칸으로 전환, 빈 곳 탭하면 deselect
-        if(cell && cell.idx !== selectedIdx) selectCell(cell.idx);
-        else if(!cell) deselect();
-      } else {
-        if(cell) selectCell(cell.idx);
-      }
+      if (selectedIdx !== null) { if (cell && cell.idx !== selectedIdx) selectCell(cell.idx); else if (!cell) deselect(); }
+      else { if (cell) selectCell(cell.idx); }
     }
     tapStart = null;
   }
-}, {passive:false});
+}, { passive: false });
 
-/* 마우스 (PC 테스트용) */
-canvas.addEventListener('mousedown', e=>{
-  if(selectedIdx !== null){
-    drag.active=true; drag.lastX=e.clientX; drag.lastY=e.clientY;
-  }
-});
-window.addEventListener('mousemove', e=>{
-  if(!drag.active||selectedIdx===null) return;
+canvas.addEventListener('mousedown', e => { if (selectedIdx !== null) { drag.active = true; drag.lastX = e.clientX; drag.lastY = e.clientY; } });
+window.addEventListener('mousemove', e => {
+  if (!drag.active || selectedIdx === null) return;
   applyPan(selectedIdx, e.movementX, e.movementY);
 });
-window.addEventListener('mouseup', e=>{
-  if(drag.active && selectedIdx!==null){
-    const moved = Math.hypot(e.movementX, e.movementY);
-    if(moved<3){
-      // 클릭으로 판정
-      const pt = canvasPt(e.clientX, e.clientY);
-      const cell = getCellAt(pt.x,pt.y);
-      if(selectedIdx!==null){
-        if(cell&&cell.idx!==selectedIdx) selectCell(cell.idx);
-        else if(!cell) deselect();
-      }
-    }
-  } else if(!drag.active){
+window.addEventListener('mouseup', e => {
+  if (!drag.active) {
     const pt = canvasPt(e.clientX, e.clientY);
-    const cell = getCellAt(pt.x,pt.y);
-    if(cell) selectCell(cell.idx);
-    else deselect();
+    const cell = getCellAt(pt.x, pt.y);
+    if (selectedIdx !== null) { if (cell && cell.idx !== selectedIdx) selectCell(cell.idx); else if (!cell) deselect(); }
+    else { if (cell) selectCell(cell.idx); }
   }
-  drag.active=false;
+  drag.active = false;
 });
 
-/* ── 핀치 줌 ── */
-let pinchState = { active:false, lastDist:0 };
-function pinchDist(e){ return Math.hypot(e.touches[0].clientX-e.touches[1].clientX, e.touches[0].clientY-e.touches[1].clientY); }
-function handlePinch(e){
-  if(selectedIdx===null) return;
+let pinchState = { active: false, lastDist: 0 };
+function pinchDist(e) { return Math.hypot(e.touches[0].clientX - e.touches[1].clientX, e.touches[0].clientY - e.touches[1].clientY); }
+function handlePinch(e) {
+  if (selectedIdx === null) return;
   const dist = pinchDist(e);
-  if(!pinchState.active){ pinchState.active=true; pinchState.lastDist=dist; return; }
-  const delta = dist / pinchState.lastDist;
-  pinchState.lastDist = dist;
+  if (!pinchState.active) { pinchState.active = true; pinchState.lastDist = dist; return; }
   const p = photos[selectedIdx];
-  p.zoom = Math.max(1, Math.min(3, p.zoom * delta));
-  zoomSlider.value = Math.round(p.zoom*100);
-  zoomVal.textContent = Math.round(p.zoom*100)+'%';
-  renderCollage();
+  p.zoom = Math.max(1, Math.min(3, p.zoom * (dist / pinchState.lastDist)));
+  pinchState.lastDist = dist;
+  zoomSlider.value = Math.round(p.zoom * 100);
+  zoomVal.textContent = Math.round(p.zoom * 100) + '%';
+  scheduleRender();
 }
 
-/* 구도 이동 적용 */
-function applyPan(idx, dxScreen, dyScreen){
+function applyPan(idx, dxScreen, dyScreen) {
   const p = photos[idx];
-  // canvas display width → canvas pixel 비율
+  const cell = cellMap.find(c => c.idx === idx);
+  if (!cell) return;
   const rect = canvas.getBoundingClientRect();
   const scale = canvas.width / rect.width;
-  // 화면 픽셀 → canvas 픽셀
-  const dxC = dxScreen * scale;
-  const dyC = dyScreen * scale;
-  // cell 크기 파악
-  const cell = cellMap.find(c=>c.idx===idx);
-  if(!cell) return;
-  // 드래그 1px = ox 변화량: 이미지의 이동 가능 범위를 cell 폭으로 정규화
-  const img = p.img;
-  const destRatio = cell.w/cell.h, srcRatio = img.width/img.height;
+  const dxC = dxScreen * scale, dyC = dyScreen * scale;
+  const img = p.thumb;
+  const destRatio = cell.w / cell.h, srcRatio = img.width / img.height;
   let sw, sh;
-  if(srcRatio>destRatio){ sw=img.height*destRatio/p.zoom; sh=img.height/p.zoom; }
-  else                   { sw=img.width/p.zoom; sh=img.width/destRatio/p.zoom; }
-  const moveableX = img.width  - sw;
-  const moveableY = img.height - sh;
-  // 화면을 오른쪽으로 끌면 이미지는 왼쪽으로 → ox 감소
-  if(moveableX>0) p.ox = Math.max(0, Math.min(1, p.ox - (dxC/cell.w)*(img.width/moveableX)*0.5));
-  if(moveableY>0) p.oy = Math.max(0, Math.min(1, p.oy - (dyC/cell.h)*(img.height/moveableY)*0.5));
-  renderCollage();
+  if (srcRatio > destRatio) { sw = img.height * destRatio / p.zoom; sh = img.height / p.zoom; }
+  else                       { sw = img.width / p.zoom; sh = img.width / destRatio / p.zoom; }
+  const mx = img.width - sw, my = img.height - sh;
+  if (mx > 0) p.ox = Math.max(0, Math.min(1, p.ox - (dxC / cell.w) * (img.width / mx) * 0.5));
+  if (my > 0) p.oy = Math.max(0, Math.min(1, p.oy - (dyC / cell.h) * (img.height / my) * 0.5));
+  scheduleRender();
 }
 
-/* ═══════════════════════════════════════
-   COLLAGE RENDER
-═══════════════════════════════════════ */
-function renderCollage(){
-  const gap=Number(gapSize.value), cols=Number(columns.value), mode=layoutType.value;
-  cellMap=[];
-  ctx.fillStyle=bgColor.value; ctx.fillRect(0,0,canvas.width,canvas.height);
-  if(!photos.length){ drawEmpty(); return; }
-  if(mode==='grid')        buildGrid(cols,gap);
-  else if(mode==='strip')  buildStrip(gap);
-  else                     buildMasonry(cols,gap);
-
-  cellMap.forEach(cell=>{
+function renderCollage() {
+  const gap = Number(gapSize.value), cols = Number(columns.value), mode = layoutType.value;
+  cellMap = [];
+  ctx.fillStyle = bgColor.value; ctx.fillRect(0, 0, canvas.width, canvas.height);
+  if (!photos.length) { drawEmpty(); return; }
+  if (mode === 'grid')       buildGrid(cols, gap);
+  else if (mode === 'strip') buildStrip(gap);
+  else                       buildMasonry(cols, gap);
+  cellMap.forEach(cell => {
     const p = photos[cell.idx];
-    coverDraw(p.img, cell.x, cell.y, cell.w, cell.h, p.ox, p.oy, p.zoom);
-
-    if(selectedIdx===cell.idx){
-      // 선택된 칸: 밝은 오버레이 + 테두리
-      ctx.save();
-      roundPath(cell.x,cell.y,cell.w,cell.h,16);
-      ctx.strokeStyle='rgba(1,105,111,1)'; ctx.lineWidth=10; ctx.stroke();
-      ctx.restore();
-
-      // 3분할 가이드선 (편집 구도 보조)
-      ctx.save();
-      roundPath(cell.x,cell.y,cell.w,cell.h,16); ctx.clip();
-      ctx.strokeStyle='rgba(255,255,255,.45)'; ctx.lineWidth=2; ctx.setLineDash([6,6]);
-      const x1=cell.x+cell.w/3, x2=cell.x+cell.w*2/3;
-      const y1=cell.y+cell.h/3, y2=cell.y+cell.h*2/3;
-      ctx.beginPath(); ctx.moveTo(x1,cell.y); ctx.lineTo(x1,cell.y+cell.h); ctx.stroke();
-      ctx.beginPath(); ctx.moveTo(x2,cell.y); ctx.lineTo(x2,cell.y+cell.h); ctx.stroke();
-      ctx.beginPath(); ctx.moveTo(cell.x,y1); ctx.lineTo(cell.x+cell.w,y1); ctx.stroke();
-      ctx.beginPath(); ctx.moveTo(cell.x,y2); ctx.lineTo(cell.x+cell.w,y2); ctx.stroke();
-      ctx.setLineDash([]);
-      ctx.restore();
-    }
+    coverDraw(p.thumb, cell.x, cell.y, cell.w, cell.h, p.ox, p.oy, p.zoom);
+    if (selectedIdx === cell.idx) drawGuide(cell);
   });
 }
 
-function buildGrid(cols,gap){
-  const rows=Math.ceil(photos.length/cols);
-  const cw=(canvas.width-gap*(cols+1))/cols, ch=(canvas.height-gap*(rows+1))/rows;
+function drawGuide(cell) {
+  ctx.save();
+  roundPath(cell.x, cell.y, cell.w, cell.h, 16); ctx.clip();
+  ctx.strokeStyle = 'rgba(255,255,255,.45)'; ctx.lineWidth = 2; ctx.setLineDash([6, 6]);
+  const x1 = cell.x + cell.w/3, x2 = cell.x + cell.w*2/3;
+  const y1 = cell.y + cell.h/3, y2 = cell.y + cell.h*2/3;
+  [[x1,cell.y,x1,cell.y+cell.h],[x2,cell.y,x2,cell.y+cell.h],
+   [cell.x,y1,cell.x+cell.w,y1],[cell.x,y2,cell.x+cell.w,y2]].forEach(([ax,ay,bx,by])=>{
+    ctx.beginPath(); ctx.moveTo(ax,ay); ctx.lineTo(bx,by); ctx.stroke();
+  });
+  ctx.setLineDash([]); ctx.restore();
+  ctx.save(); roundPath(cell.x,cell.y,cell.w,cell.h,16);
+  ctx.strokeStyle='rgba(1,105,111,1)'; ctx.lineWidth=10; ctx.stroke(); ctx.restore();
+}
+
+function buildGrid(cols, gap) {
+  const rows = Math.ceil(photos.length / cols);
+  const cw = (canvas.width - gap*(cols+1))/cols, ch = (canvas.height - gap*(rows+1))/rows;
   photos.forEach((_,i)=>{ const col=i%cols,row=Math.floor(i/cols); cellMap.push({idx:i,x:gap+col*(cw+gap),y:gap+row*(ch+gap),w:cw,h:ch}); });
 }
-function buildStrip(gap){
+function buildStrip(gap) {
   const n=photos.length, rh=(canvas.height-gap*(n+1))/n;
   photos.forEach((_,i)=>cellMap.push({idx:i,x:gap,y:gap+i*(rh+gap),w:canvas.width-gap*2,h:rh}));
 }
-function buildMasonry(cols,gap){
+function buildMasonry(cols, gap) {
   const cw=(canvas.width-gap*(cols+1))/cols, hs=new Array(cols).fill(gap);
-  photos.forEach((p,i)=>{ const r=p.img.height/p.img.width,h=Math.max(160,cw*r),mc=hs.indexOf(Math.min(...hs)); cellMap.push({idx:i,x:gap+mc*(cw+gap),y:hs[mc],w:cw,h}); hs[mc]+=h+gap; });
+  photos.forEach((p,i)=>{ const r=p.thumb.height/p.thumb.width,h=Math.max(160,cw*r),mc=hs.indexOf(Math.min(...hs)); cellMap.push({idx:i,x:gap+mc*(cw+gap),y:hs[mc],w:cw,h}); hs[mc]+=h+gap; });
 }
-function coverDraw(img,dx,dy,dw,dh,ox,oy,zoom){
+function coverDraw(img, dx, dy, dw, dh, ox, oy, zoom) {
   ox=ox??0.5; oy=oy??0.5; zoom=zoom??1;
   const destRatio=dw/dh, srcRatio=img.width/img.height;
   let sw,sh;
-  if(srcRatio>destRatio){ sw=img.height*destRatio/zoom; sh=img.height/zoom; }
-  else                   { sw=img.width/zoom; sh=img.width/destRatio/zoom; }
+  if(srcRatio>destRatio){sw=img.height*destRatio/zoom;sh=img.height/zoom;}
+  else{sw=img.width/zoom;sh=img.width/destRatio/zoom;}
   let sx=(img.width-sw)*ox, sy=(img.height-sh)*oy;
   sx=Math.max(0,Math.min(img.width-sw,sx)); sy=Math.max(0,Math.min(img.height-sh,sy));
   ctx.save(); roundPath(dx,dy,dw,dh,16); ctx.clip();
   ctx.drawImage(img,sx,sy,sw,sh,dx,dy,dw,dh); ctx.restore();
 }
-function roundPath(x,y,w,h,r){
+function roundPath(x,y,w,h,r) {
   ctx.beginPath(); ctx.moveTo(x+r,y); ctx.arcTo(x+w,y,x+w,y+h,r); ctx.arcTo(x+w,y+h,x,y+h,r); ctx.arcTo(x,y+h,x,y,r); ctx.arcTo(x,y,x+w,y,r); ctx.closePath();
 }
-function drawEmpty(){
+function drawEmpty() {
   ctx.fillStyle='#e9e6df'; ctx.fillRect(0,0,canvas.width,canvas.height);
   ctx.fillStyle='#7a7974'; ctx.textAlign='center'; ctx.textBaseline='middle';
-  ctx.font='500 40px Satoshi,sans-serif'; ctx.fillText('사진을 선택해 주세요',canvas.width/2,canvas.height/2);
-}
-function download(){
-  const a=document.createElement('a'); a.href=canvas.toDataURL('image/png'); a.download='collage.png'; a.click();
+  ctx.font='500 36px Satoshi,sans-serif'; ctx.fillText('사진을 선택해 주세요',canvas.width/2,canvas.height/2);
 }
 
-/* ═══════════════════════════════════════
-   THUMBNAILS + TOUCH DRAG REORDER
-═══════════════════════════════════════ */
-let dragSrcIdx=null;
-function renderThumbs(){
-  thumbsEl.innerHTML='';
-  photoCountEl.textContent=photos.length;
-  if(!photos.length){
+function download() {
+  if (!photos.length) return;
+  savingOverlay.classList.add('visible');
+  setTimeout(() => {
+    const EXPORT_SIZE = 2400;
+    const oc = document.createElement('canvas');
+    oc.width = EXPORT_SIZE; oc.height = EXPORT_SIZE;
+    const octx = oc.getContext('2d');
+    const scale = EXPORT_SIZE / canvas.width;
+    const gap = Number(gapSize.value) * scale;
+    const cols = Number(columns.value), mode = layoutType.value;
+    const exportCells = [];
+    octx.fillStyle = bgColor.value; octx.fillRect(0,0,EXPORT_SIZE,EXPORT_SIZE);
+    if (mode === 'grid') {
+      const rows=Math.ceil(photos.length/cols);
+      const cw=(EXPORT_SIZE-gap*(cols+1))/cols, ch=(EXPORT_SIZE-gap*(rows+1))/rows;
+      photos.forEach((_,i)=>{ const col=i%cols,row=Math.floor(i/cols); exportCells.push({idx:i,x:gap+col*(cw+gap),y:gap+row*(ch+gap),w:cw,h:ch}); });
+    } else if (mode === 'strip') {
+      const n=photos.length, rh=(EXPORT_SIZE-gap*(n+1))/n;
+      photos.forEach((_,i)=>exportCells.push({idx:i,x:gap,y:gap+i*(rh+gap),w:EXPORT_SIZE-gap*2,h:rh}));
+    } else {
+      const cw=(EXPORT_SIZE-gap*(cols+1))/cols, hs=new Array(cols).fill(gap);
+      photos.forEach((p,i)=>{ const r=p.img.height/p.img.width,h=Math.max(160*scale,cw*r),mc=hs.indexOf(Math.min(...hs)); exportCells.push({idx:i,x:gap+mc*(cw+gap),y:hs[mc],w:cw,h}); hs[mc]+=h+gap; });
+    }
+    exportCells.forEach(cell => {
+      const p = photos[cell.idx];
+      const img = p.img; // ← 원본 고화질
+      const ox=p.ox, oy=p.oy, zoom=p.zoom;
+      const destRatio=cell.w/cell.h, srcRatio=img.width/img.height;
+      let sw,sh;
+      if(srcRatio>destRatio){sw=img.height*destRatio/zoom;sh=img.height/zoom;}
+      else{sw=img.width/zoom;sh=img.width/destRatio/zoom;}
+      let sx=(img.width-sw)*ox, sy=(img.height-sh)*oy;
+      sx=Math.max(0,Math.min(img.width-sw,sx)); sy=Math.max(0,Math.min(img.height-sh,sy));
+      const r=16*scale;
+      octx.save();
+      octx.beginPath(); octx.moveTo(cell.x+r,cell.y); octx.arcTo(cell.x+cell.w,cell.y,cell.x+cell.w,cell.y+cell.h,r); octx.arcTo(cell.x+cell.w,cell.y+cell.h,cell.x,cell.y+cell.h,r); octx.arcTo(cell.x,cell.y+cell.h,cell.x,cell.y,r); octx.arcTo(cell.x,cell.y,cell.x+cell.w,cell.y,r); octx.closePath();
+      octx.clip();
+      octx.drawImage(img,sx,sy,sw,sh,cell.x,cell.y,cell.w,cell.h);
+      octx.restore();
+    });
+    const a=document.createElement('a'); a.href=oc.toDataURL('image/png'); a.download='collage.png'; a.click();
+    savingOverlay.classList.remove('visible');
+  }, 50);
+}
+
+let dragSrcIdx = null;
+function renderThumbs() {
+  thumbsEl.innerHTML = '';
+  photoCountEl.textContent = photos.length;
+  if (!photos.length) {
     thumbsEl.innerHTML='<div class="empty-state"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="opacity:.35"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="m21 15-5-5L5 21"/></svg><span>사진을 선택하면 표시됩니다</span></div>';
     return;
   }
-  photos.forEach((p,i)=>{
-    const el=document.createElement('div');
-    el.className='thumb'+(selectedIdx===i?' active':'');
-    el.dataset.idx=i;
-    el.innerHTML=`<img src="${p.src}" alt="사진 ${i+1}" width="160" height="160" loading="lazy"><span class="badge">${i+1}</span><button class="del" aria-label="삭제" data-idx="${i}"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M18 6L6 18M6 6l12 12"/></svg></button>`;
-    el.addEventListener('click', e=>{ if(e.target.closest('.del')) return; selectCell(i); });
-    el.querySelector('.del').addEventListener('click', e=>{
+  photos.forEach((p, i) => {
+    const el = document.createElement('div');
+    el.className = 'thumb' + (selectedIdx === i ? ' active' : '');
+    el.dataset.idx = i;
+    el.innerHTML = `<img src="${p.src}" alt="사진 ${i+1}" width="160" height="160" loading="lazy"><span class="badge">${i+1}</span><button class="del" aria-label="삭제" data-idx="${i}"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M18 6L6 18M6 6l12 12"/></svg></button>`;
+    el.addEventListener('click', e => { if (e.target.closest('.del')) return; selectCell(i); });
+    el.querySelector('.del').addEventListener('click', e => {
       e.stopPropagation();
-      const idx=Number(e.currentTarget.dataset.idx);
-      photos.splice(idx,1);
-      if(selectedIdx===idx) deselect();
-      else if(selectedIdx!==null&&selectedIdx>idx) selectedIdx--;
-      renderThumbs(); renderCollage();
+      const idx = Number(e.currentTarget.dataset.idx);
+      photos.splice(idx, 1);
+      if (selectedIdx === idx) deselect();
+      else if (selectedIdx !== null && selectedIdx > idx) selectedIdx--;
+      renderThumbs(); scheduleRender();
     });
-    // desktop drag
-    el.draggable=true;
+    el.draggable = true;
     el.addEventListener('dragstart', e=>{ dragSrcIdx=i; el.classList.add('drag-ghost'); e.dataTransfer.effectAllowed='move'; });
     el.addEventListener('dragend',   ()=>{ el.classList.remove('drag-ghost'); document.querySelectorAll('.thumb').forEach(t=>t.classList.remove('drag-target')); dragSrcIdx=null; });
-    el.addEventListener('dragover',  e=>{ e.preventDefault(); });
+    el.addEventListener('dragover',  e=>e.preventDefault());
     el.addEventListener('dragenter', e=>{ e.preventDefault(); if(dragSrcIdx!==i) el.classList.add('drag-target'); });
     el.addEventListener('dragleave', ()=>el.classList.remove('drag-target'));
-    el.addEventListener('drop',      e=>{ e.preventDefault(); el.classList.remove('drag-target'); if(dragSrcIdx!==null&&dragSrcIdx!==i){ doReorder(dragSrcIdx,i); dragSrcIdx=null; } });
-    // touch long-press drag
+    el.addEventListener('drop', e=>{ e.preventDefault(); el.classList.remove('drag-target'); if(dragSrcIdx!==null&&dragSrcIdx!==i){ doReorder(dragSrcIdx,i); dragSrcIdx=null; } });
     let ts=null,tv=false,tm=null;
     el.addEventListener('touchstart', e=>{ ts={x:e.touches[0].clientX,y:e.touches[0].clientY}; tm=setTimeout(()=>{ dragSrcIdx=i; el.classList.add('drag-ghost'); },400); },{passive:true});
     el.addEventListener('touchmove', e=>{
-      if(dragSrcIdx===null){ clearTimeout(tm); return; }
+      if(dragSrcIdx===null){clearTimeout(tm);return;}
       e.preventDefault(); tv=true;
       const t=e.touches[0];
       document.querySelectorAll('.thumb').forEach(x=>x.classList.remove('drag-target'));
@@ -620,25 +560,20 @@ function renderThumbs(){
     el.addEventListener('touchend', e=>{
       clearTimeout(tm); el.classList.remove('drag-ghost');
       document.querySelectorAll('.thumb').forEach(x=>x.classList.remove('drag-target'));
-      if(dragSrcIdx!==null&&tv){
-        const t=e.changedTouches[0];
-        const under=document.elementFromPoint(t.clientX,t.clientY)?.closest('.thumb');
-        if(under){ const d=Number(under.dataset.idx); if(d!==dragSrcIdx) doReorder(dragSrcIdx,d); }
-      }
+      if(dragSrcIdx!==null&&tv){ const t=e.changedTouches[0]; const under=document.elementFromPoint(t.clientX,t.clientY)?.closest('.thumb'); if(under){const d=Number(under.dataset.idx);if(d!==dragSrcIdx)doReorder(dragSrcIdx,d);} }
       dragSrcIdx=null; tv=false;
     },{passive:true});
     thumbsEl.appendChild(el);
   });
 }
-function doReorder(from,to){
+function doReorder(from, to) {
   const moved=photos.splice(from,1)[0]; photos.splice(to,0,moved);
   if(selectedIdx===from) selectedIdx=to;
-  else if(selectedIdx!==null){ if(from<to&&selectedIdx>from&&selectedIdx<=to) selectedIdx--; else if(from>to&&selectedIdx>=to&&selectedIdx<from) selectedIdx++; }
-  renderThumbs(); renderCollage();
+  else if(selectedIdx!==null){ if(from<to&&selectedIdx>from&&selectedIdx<=to)selectedIdx--; else if(from>to&&selectedIdx>=to&&selectedIdx<from)selectedIdx++; }
+  renderThumbs(); scheduleRender();
 }
 
-/* init */
-renderThumbs(); renderCollage();
+renderThumbs(); scheduleRender();
 </script>
 </body>
 </html>
